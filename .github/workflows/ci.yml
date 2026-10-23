@@ -1,0 +1,20 @@
+name: TaskAnalyzer CI
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Configurar Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+    - name: Instalar dependencias
+      run: pip install -r requirements.txt
+    - name: Executar testes
+      run: pytest tests/test_harness.py -v
